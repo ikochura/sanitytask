@@ -1,0 +1,81 @@
+{% extends 'sanitytask_new/index.html' %}
+{% load basetag %}
+{% load static %}
+{% block content %}
+
+
+
+    <!-- Page Heading -->
+    <div class="container-fluid">
+        <h1 class="h3 mb-2 text-gray-800">Calendar</h1>
+        <div class="col-lg-4">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <table class="table table-hover table-heading" width="100%">
+                        <tr>
+                            <td align="left">
+                                &lt;&lt; <a
+                                    href={% url 'calendar_day' prev_year prev_month 1 %}>{{ prev_month_name }}</a>
+                            </td>
+                            <td align="center">
+                                <a href={% url 'check_calendar' %}>Today</a>
+                            </td>
+
+                            <td align="right">
+                                <a href={% url 'calendar_day' next_year next_month 1 %}>{{ next_month_name }}</a>
+                                &gt;&gt;
+                            </td>
+
+                        </tr>
+                    </table>
+                    <div class="table" id="calendar">
+                        {{ calendar }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Day Checks</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dt-day-checks" width="100%" cellspacing="0">
+                        <thead>
+                        <th>Client</th>
+                        <th>Check group</th>
+                        <th>Name Task</th>
+                        <th>Date</th>
+                        <th>User</th>
+                        <th>Results</th>
+                        </thead>
+
+                        <h3>Day Checks</h3>
+                        {% for ch in check %}
+                            <tr>
+
+                                <td>{{ ch.check_task.check_group.client.name }}</td>
+                                <td>{{ ch.check_task.check_group.name }}</td>
+                                <td>{{ ch.check_task.name_task }}</td>
+                                <td>{{ ch.date }}</td>
+                                <td>{{ ch.user }}</td>
+                                <td class="{{ ch.get_class }}"><img
+                                        src={% static ch.result|yesno:'sanitytask_new/img/tr.png,sanitytask_new/img/fl.png' %} width="20"> {{ ch.comment }}
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block header %}
+    Calendar
+{% endblock %}

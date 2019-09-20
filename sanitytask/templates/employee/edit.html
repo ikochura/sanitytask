@@ -1,0 +1,25 @@
+{% extends 'sanitytask_new/index.html' %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <br>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <table class="table table-bordered table-light">
+                            {{ user_form.as_table }}
+                        </table>
+                        <br>
+                        <button type="submit" class="btn btn-warning float-right">Update Employee</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

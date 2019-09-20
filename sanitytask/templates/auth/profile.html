@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+    <br>
+    <h4>My Profile</h4>
+    <table class="table table-light table-bordered table-striped">
+        <tbody>
+        <tr>
+            <th>First Name</th>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-warning" href="{% url 'profile_edit' %}">Edit</a>
+    <a class="btn btn-danger" href="{% url 'change_pass' %}">Change password</a>
+{% endblock content %}

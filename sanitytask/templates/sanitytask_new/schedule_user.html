@@ -1,0 +1,69 @@
+{% extends 'sanitytask_new/index.html' %}
+{% load static %}
+{% load basetag %}
+{% block content %}
+
+    {% for com,task in qs_shift.iteritems %}
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ com }}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="inline-size: 30px !important;">Check group</th>
+                                <th style="inline-size: 30px !important;">User</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
+                            </tr>
+                            </thead>
+
+                            {% for el in task %}
+                                <tr>
+                                    <td>{{ el.checkgroup.name }}</td>
+                                    <td>{{ el.user }}</td>
+                                    <td class="{{ el.mon|yesno:'alert alert-success,alert alert-primary' }}"><img
+                                            src={% static el.mon|yesno:'sanitytask_new/img/work.png,sanitytask_new/img/wait.png' %} width="20">
+                                    </td>
+                                    <td class="{{ el.tue|yesno:'alert alert-success,alert alert-primary' }}"><img
+                                            src={% static el.tue|yesno:'sanitytask_new/img/work.png,sanitytask_new/img/wait.png' %} width="20">
+                                    </td>
+                                    <td class="{{ el.wed|yesno:'alert alert-success,alert alert-primary' }}"><img
+                                            src={% static el.wed|yesno:'sanitytask_new/img/work.png,sanitytask_new/img/wait.png' %} width="20">
+                                    </td>
+                                    <td class="{{ el.thu|yesno:'alert alert-success,alert alert-primary' }}"><img
+                                            src={% static el.thu|yesno:'sanitytask_new/img/work.png,sanitytask_new/img/wait.png' %} width="20">
+                                    </td>
+                                    <td class="{{ el.fri|yesno:'alert alert-success,alert alert-primary' }}"><img
+                                            src={% static el.fri|yesno:'sanitytask_new/img/work.png,sanitytask_new/img/wait.png' %} width="20">
+                                    </td>
+                                    <td class="{{ el.sat|yesno:'alert alert-success,alert alert-primary' }}"><img
+                                            src={% static el.sat|yesno:'sanitytask_new/img/work.png,sanitytask_new/img/wait.png' %} width="20">
+                                    </td>
+                                    <td class="{{ el.sun|yesno:'alert alert-success,alert alert-primary' }}"><img
+                                            src={% static el.sun|yesno:'sanitytask_new/img/work.png,sanitytask_new/img/wait.png' %} width="20">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+{% endblock %}
+
+{% block header %}
+    Shift
+{% endblock %}

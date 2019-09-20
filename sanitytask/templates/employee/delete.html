@@ -1,0 +1,19 @@
+{% extends 'sanitytask_new/index.html' %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Delete</h6>
+            </div>
+            <br>
+            <h2>{{ user.first_name }} &nbsp; {{ user.last_name }}</h2>
+            <form method="post">
+                {% csrf_token %}
+                <p>Are you sure to delete this user?</p>
+                <input type="submit" value="Yes">
+            </form>
+        </div>
+    </div>
+{% endblock content %}

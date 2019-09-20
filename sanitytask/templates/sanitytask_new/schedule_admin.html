@@ -1,0 +1,52 @@
+{% extends 'sanitytask_new/index.html' %}
+{% load basetag %}
+{% load static %}
+{% block content %}
+
+
+
+    {% for com,cg in shifts.iteritems %}
+        <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ com }}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+
+                        <thead>
+                        <th style="inline-size: 200px">Checkgroup</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
+                        </thead>
+                        {% for task, week in cg.iteritems %}
+                            <tr>
+                                <td>{{ task }}</td>
+                                {% for user in week %}
+                                    <td class="{{ user|yesno:'alert alert-success,alert alert-danger' }}"><img
+                                            src={% static user|yesno:'sanitytask_new/img/tr.png,sanitytask_new/img/fl.png' %} width="20">
+                                        {% if user %}
+                                            {{ user }}{% endif %}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <h2>You don't have permissions to view this page</h2>
+    {% endfor %}
+
+
+{% endblock content %}
+
+{% block header %}
+    Shift-Admin
+{% endblock %}

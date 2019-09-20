@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SanityChecker</title>
+    <meta name="description" content="description">
+    <meta name="author" content="Evgeniya">
+    <meta name="keyword" content="keywords">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+    <link href="../../static/sanitytask_new/css/style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+				<script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
+				<script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<img src={% static 'sanitytask_new/img/logo-fdc-white.png' %} style="max-width:109px;margin-left:30px;margin-top:30px"
+     alt="logo">
+
+<div class="login">
+    <h2> Sanity Checker</h2>
+    <form method="post">{% csrf_token %}
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+            {% else %}
+
+            {% endif %}
+        {% endif %}
+        <label>
+            <input type="text" name="username" placeholder="Username" required="required"/>
+        </label>
+
+        <label>
+            <input type="password" name="password" placeholder="Password" required="required"/>
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Login.</button>
+    </form>
+</div>
+</html>
